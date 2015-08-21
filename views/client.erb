@@ -17,3 +17,11 @@
     <button type="submit" class="btn">Update Client</button>
   </div>
 </form>
+
+<form action="/clients/<%= @client.id() %>" method="post">
+  <div class="form-group">
+    <input type="hidden" name="_method" value="delete">
+
+    <button type="submit" class="btn">Delete Client</button>
+  </div>
+</form>

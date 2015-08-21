@@ -21,7 +21,7 @@ describe('adding a new stylist', {:type => :feature}) do
     click_link('Add a Stylist')
     fill_in('name', :with => 'Lydia')
     click_button('Add Stylist')
-    expect(page).to have_content('Successfully added!')
+    expect(page).to have_content('Operation Success!')
   end
 end
 
@@ -54,7 +54,7 @@ describe('adding clients to a stylist', {:type => :feature}) do
     visit("/stylists/#{lydia.id()}")
     fill_in("name", {:with => 'Maurice'})
     click_button('Add Client')
-    expect(page).to have_content('Successfully added!')
+    expect(page).to have_content('Operation Success!')
   end
 end
 
@@ -65,7 +65,7 @@ describe('updating stylist information', {:type => :feature}) do
     visit("/stylists/#{lydia.id()}")
     fill_in("update_name", {:with => 'Christine'})
     click_button('Update Stylist')
-    expect(page).to have_content('Successfully added!')
+    expect(page).to have_content('Operation Success!')
   end
 end
 
@@ -78,6 +78,28 @@ describe('updating client information', {:type => :feature}) do
     visit("/clients/#{maurice.id()}")
     fill_in("update_name", {:with => 'Kevin'})
     click_button('Update Client')
-    expect(page).to have_content('Successfully added!')
+    expect(page).to have_content('Operation Success!')
+  end
+end
+
+describe('deleting stylist information', {:type => :feature}) do
+  it('allows a user to delete a stylist') do
+    lydia = Stylist.new({:name => 'Lydia', :id => nil})
+    lydia.save()
+    visit("/stylists/#{lydia.id()}")
+    click_button('Delete Stylist')
+    expect(page).to have_content('Operation Success!')
+  end
+end
+
+describe('deleting client information', {:type => :feature}) do
+  it('allows a user to delete a client') do
+    lydia = Stylist.new({:name => 'Lydia', :id => nil})
+    lydia.save()
+    maurice = Client.new({:name => 'Maurice', :id => nil, :stylist_id => lydia.id()})
+    maurice.save()
+    visit("/clients/#{maurice.id()}")
+    click_button('Delete Client')
+    expect(page).to have_content('Operation Success!')
   end
 end
