@@ -68,4 +68,26 @@ describe(Stylist) do
       expect(lydia.name()).to(eq('Christine'))
     end
   end
+
+  describe('#delete') do
+    it('deletes a stylist from the database') do
+      lydia1 = Stylist.new({:name => 'Lydia', :id => nil})
+      lydia1.save()
+      lydia2 = Stylist.new({:name => 'Lydia', :id => nil})
+      lydia2.save()
+      lydia1.delete()
+      expect(Stylist.all()).to(eq([lydia2]))
+    end
+
+    it('deletes associated clients when a stylist is deleted') do
+      lydia = Stylist.new({:name => 'Lydia', :id => nil})
+      lydia.save()
+      maurice = Client.new({:name => 'Maurice', :id => nil, :stylist_id => lydia.id()})
+      maurice.save()
+      steffan = Client.new({:name => 'Steffan', :id => nil, :stylist_id => lydia.id()})
+      steffan.save()
+      lydia.delete()
+      expect(Client.all()).to(eq([]))
+    end
+  end
 end
