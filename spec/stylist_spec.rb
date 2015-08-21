@@ -21,4 +21,20 @@ describe(Stylist) do
       expect(Stylist.all()).to(eq([]))
     end
   end
+
+  describe('#save') do
+    it('saves a stylist to the database') do
+      lydia = Stylist.new({:name => 'Lydia', :id => nil})
+      lydia.save()
+      expect(Stylist.all()).to(eq([lydia]))
+    end
+  end
+
+  describe('#id') do
+    it('sets stylist ID when saved') do
+      lydia = Stylist.new({:name => 'Lydia', :id => nil})
+      lydia.save()
+      expect(lydia.id()).to(be_an_instance_of(Fixnum))
+    end
+  end
 end
