@@ -15,4 +15,10 @@ describe(Stylist) do
       expect(lydia1).to(eq(lydia2))
     end
   end
+
+  describe('.all') do
+    it('is empty at first') do
+      expect(Stylist.all()).to(eq([]))
+    end
+  end
 end
