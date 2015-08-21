@@ -1,7 +1,20 @@
 <h1>All Stylists</h1>
 
-<ul>
-  <% @stylists.each() do |stylist| %>
-    <li><a href="/stylists/<%= stylist.id() %>"><%= stylist.name() %></a></li>
-  <% end %>
-</ul>
+
+<% if @stylists.any?() %>
+
+  <h3>Stylists:</h3>
+
+  <ul>
+    <% @stylists.each() do |stylist| %>
+      <li><a href="/stylists/<%= stylist.id() %>"><%= stylist.name() %></a></li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+  <p>There are no Stylists yet!</p>
+
+<% end %>
+
+<p><a href="/">Return Home</a></p>

@@ -22,3 +22,15 @@ describe('viewing all stylists', {:type => :feature}) do
     expect(page).to have_content(lydia.name())
   end
 end
+
+describe('viewing an individual stylist', {:type => :feature}) do
+  it('allows a user to view an individual stylist page and see their details and clients') do
+    lydia = Stylist.new({:name => 'Lydia', :id => nil})
+    lydia.save()
+    maurice = Client.new({:name => 'Maurice', :id => nil, :stylist_id => lydia.id()})
+    maurice.save()
+    visit('/stylists')
+    click_link(lydia.name())
+    expect(page).to have_content(maurice.name())
+  end
+end

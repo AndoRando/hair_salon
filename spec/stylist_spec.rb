@@ -37,4 +37,26 @@ describe(Stylist) do
       expect(lydia.id()).to(be_an_instance_of(Fixnum))
     end
   end
+
+  describe('.find') do
+    it('returns a stylist by their ID') do
+      lydia1 = Stylist.new({:name => 'Lydia', :id => nil})
+      lydia1.save()
+      lydia2 = Stylist.new({:name => 'Lydia', :id => nil})
+      lydia2.save()
+      expect(Stylist.find(lydia2.id())).to(eq(lydia2))
+    end
+  end
+
+  describe('#clients') do
+    it('returns an array of clients for a particular stylist') do
+      lydia = Stylist.new({:name => 'Lydia', :id => nil})
+      lydia.save()
+      maurice = Client.new({:name => 'Maurice', :id => nil, :stylist_id => lydia.id()})
+      maurice.save()
+      steffan = Client.new({:name => 'Steffan', :id => nil, :stylist_id => lydia.id()})
+      steffan.save()
+      expect(lydia.clients()).to(eq([maurice, steffan]))
+    end
+  end
 end

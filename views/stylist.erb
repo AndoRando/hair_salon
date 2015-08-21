@@ -1,0 +1,23 @@
+<h1><%= @stylist.name() %> - Details and Clients</h1>
+
+<h3>Details:</h3>
+
+
+
+<h3>Clients:</h3>
+
+<% if @stylist.clients().any?() %>
+
+  <ul>
+    <% @stylist.clients().each() do |client| %>
+      <li><a href="/stylists/<%= @stylist.id() %>/clients/<%= client.id() %>"><%= client.name() %></a></li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+  <p><%= @stylist.name() %> has no clients yet!</p>
+
+<% end %>
+
+<h3>Add a new Client:</h3>
