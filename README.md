@@ -11,12 +11,13 @@ _This application allows the hair salon manager(s) to add, view, update, and del
 ## Setup
 
 * _Clone repository to desired staging location_
+* _Point your termial to the top directory of the repository folder and run: $ bundle_
 * _Create and connect to a Postgres SQL database using the PG and PSQL gems with the following information:_
 * _-In PSQL:_
 * _- $ CREATE DATABASE hair_salon;_
 * _- $ CREATE TABLE stylists (id serial PRIMARY KEY, name varchar);_
 * _- $ CREATE TABLE clients (id serial PRIMARY KEY, name varchar, stylist_id int);_
-* _Point your termial to the top directory of the repository folder and run: $ ruby app.rb_
+* _With your termial still in the top directory of the repository folder, run: $ ruby app.rb_
 * _In your browser of choice, navigate to: localhost:4567_
 * _Manage your salon!_
 
