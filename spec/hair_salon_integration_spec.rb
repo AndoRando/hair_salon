@@ -3,6 +3,18 @@ require('./app')
 Capybara.app = Sinatra::Application
 set(:show_exceptions, false)
 
+RSpec.configure do |config|
+  config.include Capybara::DSL
+end
+
+# I had to put this in due to an error on line 54. It's possible other students encountered this problem as well.
+#
+# 1) adding clients to a stylist allows a user to add a client to a stylist
+#    Failure/Error: visit("/stylists/#{lydia.id()}")
+#    NoMethodError:
+#      undefined method `visit' for #<RSpec::ExampleGroups::AddingClientsToAStylist:0x007fc9756e0a00>
+#    # ./spec/hair_salon_integration_spec.rb:42:in `block (2 levels) in <top (required)>'
+
 describe('adding a new stylist', {:type => :feature}) do
   it('allows a user to add a stylist and view thier clients and stylist details') do
     visit('/')
@@ -32,5 +44,16 @@ describe('viewing an individual stylist', {:type => :feature}) do
     visit('/stylists')
     click_link(lydia.name())
     expect(page).to have_content(maurice.name())
+  end
+end
+
+describe('adding clients to a stylist') do
+  it('allows a user to add a client to a stylist') do
+    lydia = Stylist.new({:name => 'Lydia', :id => nil})
+    lydia.save()
+    visit("/stylists/#{lydia.id()}")
+    fill_in("name", {:with => 'Maurice'})
+    click_button('Add Client')
+    expect(page).to have_content('Successfully added!')
   end
 end

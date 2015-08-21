@@ -59,4 +59,13 @@ describe(Stylist) do
       expect(lydia.clients()).to(eq([maurice, steffan]))
     end
   end
+
+  describe('#update') do
+    it('updates stylists in the database') do
+      lydia = Stylist.new({:name => 'Lydia', :id => nil})
+      lydia.save()
+      lydia.update({:name => 'Christine'})
+      expect(lydia.name()).to(eq('Christine'))
+    end
+  end
 end

@@ -27,4 +27,10 @@ class Client
     save_me = DB.exec("INSERT INTO clients (name, stylist_id) VALUES ('#{@name}', #{@stylist_id}) RETURNING id;")
     @id = save_me.first().fetch("id").to_i()
   end
+
+  define_method(:update) do |attr|
+    @name = attr.fetch(:name)
+    @id = self.id()
+    DB.exec("UPDATE clients SET name = '#{@name}' WHERE id = #{@id}")
+  end
 end
