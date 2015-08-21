@@ -23,6 +23,16 @@ class Client
     clients
   end
 
+  define_singleton_method(:find) do |id|
+    found_client = nil
+    Client.all.each() do |client|
+      if client.id().==(id)
+        found_client = client
+      end
+    end
+    found_client
+  end
+
   define_method(:save) do
     save_me = DB.exec("INSERT INTO clients (name, stylist_id) VALUES ('#{@name}', #{@stylist_id}) RETURNING id;")
     @id = save_me.first().fetch("id").to_i()

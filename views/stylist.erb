@@ -2,7 +2,20 @@
 
 <h3>Details:</h3>
 
+<p>Name: <%= @stylist.name() %></p>
 
+<h3>Update Details:</h3>
+
+<form class="form-group" action="/stylists/<%= @stylist.id() %>" method="post">
+  <div class="form-group">
+    <input type="hidden" name="_method" value="patch">
+
+    <label for="update_name" class="form-label">New name:</label>
+    <input type="text" id="update_name" name="update_name" class="form-control">
+
+    <button type="submit" class="btn">Update Stylist</button>
+  </div>
+</form>
 
 <h3>Clients:</h3>
 
@@ -10,7 +23,7 @@
 
   <ul>
     <% @stylist.clients().each() do |client| %>
-      <li><a href="/stylists/<%= @stylist.id() %>/clients/<%= client.id() %>"><%= client.name() %></a></li>
+      <li><a href="/clients/<%= client.id() %>"><%= client.name() %></a></li>
     <% end %>
   </ul>
 
@@ -22,13 +35,15 @@
 
 <h3>Add a new Client for <%= @stylist.name() %>:</h3>
 
-<form class="form-group" action="/clients" method="post">
-  <input type="hidden" id="stylist_id" name="stylist_id" value="<%= @stylist.id() %>">
+<form action="/clients" method="post">
+  <div class="form-group">
+    <input type="hidden" id="stylist_id" name="stylist_id" value="<%= @stylist.id() %>">
 
-  <label for="name" class="form-label">Name of the Client:</label>
-  <input type="text" id="name" name="name" class="form-control">
+    <label for="name" class="form-label">Name of the Client:</label>
+    <input type="text" id="name" name="name" class="form-control">
 
-  <button type="submit" class="btn">Add Client</button>
+    <button type="submit" class="btn">Add Client</button>
+  </div>
 </form>
 
 <p><a href="/">Return Home</a></p>

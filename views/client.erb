@@ -1,0 +1,19 @@
+<h1><%= @client.name() %> - Details</h1>
+
+<h3>Details:</h3>
+
+<p>Name: <%= @client.name() %></p>
+<p>Stylist: <a href="/stylists/<%= @client.stylist_id() %>"><%= Stylist.find(@client.stylist_id()).name() %></a></p>
+
+<h3>Update Details:</h3>
+
+<form class="form-group" action="/clients/<%= @client.id() %>" method="post">
+  <div class="form-group">
+    <input type="hidden" name="_method" value="patch">
+
+    <label for="update_name" class="form-label">New name:</label>
+    <input type="text" id="update_name" name="update_name" class="form-control">
+
+    <button type="submit" class="btn">Update Client</button>
+  </div>
+</form>

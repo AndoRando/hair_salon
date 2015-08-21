@@ -38,10 +38,29 @@ describe(Client) do
     end
   end
 
+  describe('.find') do
+    it('returns a client by their ID') do
+      maurice1 = Client.new({:name => 'Maurice', :id => nil, :stylist_id => 1})
+      maurice1.save()
+      maurice2 = Client.new({:name => 'Maurice', :id => nil, :stylist_id => 1})
+      maurice2.save()
+      expect(Client.find(maurice1.id())).to(eq(maurice2))
+    end
+  end
+
   describe('#stylist_id') do
     it('returns the stylist of a specific client') do
       maurice = Client.new({:name => 'Maurice', :id => nil, :stylist_id => 1})
       expect(maurice.stylist_id()).to(eq(1))
+    end
+  end
+
+  describe('#update') do
+    it('updates clients in the database') do
+      maurice = Client.new({:name => 'Maurice', :id => nil, :stylist_id => 1})
+      maurice.save()
+      maurice.update({:name => 'Steffan'})
+      expect(maurice.name()).to(eq('Steffan'))
     end
   end
 end
